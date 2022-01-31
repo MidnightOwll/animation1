@@ -5,7 +5,21 @@
 body{
 
 }
-
+//переменные----------------------------------
+//Анимация для блока auto
+//продолжительность
+$duration:16s; 
+//стиль перехода
+$tf:linear;
+//количество циклов анимации
+$count:1;
+//направление
+$direction: normal;
+//задержка анимации
+$delay:0s;
+//fill-mode
+$fm: forwards;
+//----------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------------------
 //Оболочка
 .wrapper{
@@ -53,7 +67,7 @@ body{
     }
     &::after,
     &::before{
-        animation: figure3-bd 6s linear 7s 1 normal forwards
+        animation: figure3-bd 6s linear 7s 1 normal forwards;
     }
     
     @keyframes figure1{
@@ -132,13 +146,127 @@ body{
     }
 }
 .auto{
-    position: absolute;
-    border: 20px solid #c53030;
-    border-radius: 50%;
-    width: 0;
-    height: 0;
+    position: relative;
+    width: 0px;
+    height: 0px;
     margin: 5px;
-    transform: translate3d(90px, 90px, 0px);
+    top: 0px;
+    left: 0px;
+    transform: translate(90px, 90px);
+    animation: auto-body $duration $tf $count $direction $delay $fm;
+
+    &::after{
+        content: '';
+        position: absolute;
+        border: 20px solid #c53030;
+        border-radius:50%;
+        border-left-color: transparent;
+        border-bottom-color: transparent;        
+        transform: translate(-1px, 1px);
+        animation: auto-top $duration $tf $count $direction $delay $fm;
+    }
+    &::before{
+        content: '';
+        position: absolute;
+        border: 20px solid #c53030;
+        border-radius: 50%;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        animation: auto-bot $duration $tf $count $direction $delay $fm;
+    }
+    @keyframes auto-top{
+        0%{
+            
+        }
+        20%{
+            border-radius: 0%;
+            border-top-color: #30c530;
+            border-right-color: #30c530;
+            border-radius: 0%;
+            transform: translate(0, 0) rotate(0deg);
+        }
+        40%{
+            border-radius: 0%;
+            border-top-color: #83106a;
+            border-right-color: #83106a;
+            transform: translate(0, 25%) rotate(-45deg) ;
+        }
+        60%{
+            border-radius: 0%;
+            border-top-color: #ad560e;
+            border-right-color: transparent;
+            transform: translate(0, 20px) rotate(0deg);            
+        }
+        100%{
+            
+        }
+    }
+    @keyframes auto-bot{
+        0%{
+            
+        }
+        20%{ 
+            //bottom: 0;           
+            border-radius: 0%;
+            transform: translate(0, 0) rotate(0deg);
+            border-bottom-color: #30c530;
+            border-left-color: #30c530;
+        }
+        30%{
+            border-radius: 0%;
+            border-bottom-color: #83106a;
+            border-left-color: #83106a;
+        }
+        40%{
+            border-radius: 0%;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            transform: translate(0, -25%) rotate(-45deg);
+        }
+        50%{
+            border-radius: 0%;
+            border-bottom-color: #ad560e;
+            border-left-color: #ad560e;
+        }
+        60%{
+            border-radius: 0%;
+            border-left-color: transparent;
+            transform: translate(0, -40px) rotate(0deg);
+        }
+        100%{
+
+        }
+    }
+    @keyframes auto-body{
+        0%{
+            
+        }
+        20%{
+            top: 0;
+            left: 100%;
+            transform: translate(-140px,90px);
+            width: 0px;
+            height: 0px;
+        }
+        40%{
+            top: 100%;
+            left: 100%;
+            transform: translate(-140px,-140px);
+            width: 0px;
+            height: 0px;
+        }
+        60%{
+            top: 100%;
+            left: 0%;
+            transform: translate(90px, -140px);
+            width: 40px;
+            height: 20px;
+            background-color: #ad560e;
+        }
+        100%{
+                        
+        }
+    }
 }
 .test{
     position: absolute;
